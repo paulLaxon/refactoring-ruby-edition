@@ -2,10 +2,6 @@
 
 # Movie class
 class Movie
-  REGULAR = 0
-  NEW_RELEASE = 1
-  CHILDRENS = 2
-
   attr_accessor :title
   attr_writer :price
 
