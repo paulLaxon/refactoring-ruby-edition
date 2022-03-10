@@ -9,9 +9,9 @@ describe 'Rentals' do
   let(:henry) { Customer.new('Henry') }
   let(:sarah) { Customer.new('Sarah') }
 
-  let(:batman) { Movie.new('Batman', 0) }
-  let(:dune) { Movie.new('Dune', 1) }
-  let(:thomas) { Movie.new('Thomas', 2) }
+  let(:batman) { Movie.new('Batman', RegularPrice.new) }
+  let(:dune) { Movie.new('Dune',NewReleasePrice.new) }
+  let(:thomas) { Movie.new('Thomas', ChildrensPrice.new) }
 
   context 'when renting movies' do
     it 'Bob gets a statement' do
