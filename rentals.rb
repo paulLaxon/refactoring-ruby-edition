@@ -7,17 +7,10 @@ class Movie
   CHILDRENS = 2
 
   attr_reader :title, :price_code
+  attr_writer :price
 
   def price_code=(value)
     @price_code = value
-    @price = case price_code
-             when REGULAR
-               RegularPrice.new
-             when NEW_RELEASE
-               NewReleasePrice.new
-             when CHILDRENS
-               ChildrensPrice.new
-             end
   end
 
   def initialize(title, initial_price_code)
@@ -26,7 +19,7 @@ class Movie
   end
 
   def frequent_renter_points(days_rented)
-    price_code == NEW_RELEASE && days_rented > 1 ? 2 : 1
+    @price.frequent_renter_points(days_rented)
   end
 
   def charge(days_rented)
@@ -98,8 +91,17 @@ class Customer
   end
 end
 
+# module DefaultPrice
+module DefaultPoints
+  def frequent_renter_points(_days_rented)
+    1
+  end
+end
+
 # class RegularPrice
 class RegularPrice
+  include DefaultPoints
+
   def charge(days_rented)
     result = 2
     result += (days_rented - 2) * 1.5 if days_rented > 2
@@ -112,10 +114,16 @@ class NewReleasePrice
   def charge(days_rented)
     days_rented * 3
   end
+
+  def frequent_renter_points(days_rented)
+    days_rented > 1 ? 2 : 1
+  end
 end
 
 # class ChildrensPrice
 class ChildrensPrice
+  include DefaultPoints
+
   def charge(days_rented)
     result = 1.5
     result += (days_rented - 3) * 1.5 if days_rented > 3
