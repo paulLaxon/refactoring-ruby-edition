@@ -108,7 +108,6 @@ end
 # class NewReleasePrice
 class NewReleasePrice
   def charge(days_rented)
-		byebug
     days_rented * 3
   end
 
