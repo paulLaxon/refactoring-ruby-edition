@@ -92,7 +92,7 @@ class Customer
 end
 
 # module DefaultPrice
-module DefaultPoints
+module DefaultPrice
   def frequent_renter_points(_days_rented)
     1
   end
@@ -100,7 +100,7 @@ end
 
 # class RegularPrice
 class RegularPrice
-  include DefaultPoints
+  include DefaultPrice
 
   def charge(days_rented)
     result = 2
@@ -122,7 +122,7 @@ end
 
 # class ChildrensPrice
 class ChildrensPrice
-  include DefaultPoints
+  include DefaultPrice
 
   def charge(days_rented)
     result = 1.5
